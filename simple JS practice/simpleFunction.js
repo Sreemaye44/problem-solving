@@ -59,4 +59,56 @@ function isPrime(num) {
 }
 console.log(isPrime(15))
 
+///////////////////////////////Asynchronous////////////////////////////////////////////
+function printString(string) {
+    setTimeout(() => {
+        console.log(string)
+    }, Math.floor(Math.random()*100)+1);
+}
+
+function printAll() {
+    printString("A");
+    printString("B");
+    printString("c");
+}
+printAll();
+///////////////////////////////synchronous(cALLBACK)////////////////////////////////////////////
+function printString(string, callback) {
+    setTimeout(() => {
+        console.log(string)
+        callback();
+    }, Math.floor(Math.random()*100)+1);
+}
+
+function printAll() {
+    printString("A", () => {
+        printString("B", () => {
+            printString("c", () => {
+                
+            })
+        })
+    })
+}
+//////////////////////////pROMISE)///////////////////////
+function printString(string) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log(string)
+            resolve();
+        }, Math.floor(Math.random()*100)+1);
+    })
+   
+}
+
+function printAll() {
+    printString("A")
+    .then(()=>printString("B"))
+    .then(()=>printString("C"))
+}
+async function printAll() {
+    await printString("A");
+    await printString("B");
+    await printString("C");
+}
+
 
